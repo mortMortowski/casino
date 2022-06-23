@@ -1,10 +1,16 @@
 import {useState} from 'react';
+import makeBet from './functions/makeBet.js';
+//import verifyBet from './functions/verifyBet.js';
 
 let timer;
 
 function Home(){
     const [timerRunning, setTimerRunning] = useState(false);
     const [balance, setBalance] = useState(500);
+    const [redBet, setRedBet] = useState(0);
+    const [greenBet, setGreenBet] = useState(0);
+    const [blackBet, setBlackBet] = useState(0);
+    const [madeBet, setMadeBet] = useState(false);
 
     return(
         <div className="Home">
@@ -16,16 +22,16 @@ function Home(){
             </div>
             <div className="bets">
                 <div className="red-bets">
-                    <div className="red-amount">0</div>
-                    <button onClick={() => {makeBet("red")}}>Red</button>
+                    <div className="red-amount">{redBet}</div>
+                    <button onClick={() => {makeBet("red", timerRunning, setRedBet, redBet, balance, setBalance, setMadeBet)}}>Red</button>
                 </div>
                 <div className="green-bets">
-                    <div className="green-amount">0</div>
-                    <button onClick={() => {makeBet("green")}}>Green</button>
+                    <div className="green-amount">{greenBet}</div>
+                    <button onClick={() => {makeBet("green", timerRunning, setGreenBet, greenBet, balance, setBalance, setMadeBet)}}>Green</button>
                 </div>
                 <div className="black-bets">
-                    <div className="black-amount">0</div>
-                    <button onClick={() => {makeBet("black")}}>Black</button>
+                    <div className="black-amount">{blackBet}</div>
+                    <button onClick={() => {makeBet("black", timerRunning, setBlackBet, blackBet, balance, setBalance, setMadeBet)}}>Black</button>
                 </div>
             </div>
             <div className="admin-panel">
@@ -55,6 +61,7 @@ function startTimer(timerRunning, setTimerRunning){
                 setTimerRunning(false);
                 setTimeout(() => {
                     generateRandom();
+                    //verifyBet();
                     startTimer(timerRunning, setTimerRunning);
                 }, 1000);
             }
@@ -74,27 +81,8 @@ function generateRandom(){
     
 }
 
-function makeBet(color){
-    const betAmount = document.querySelector('.betInput').value;
-    if(betAmount === ''){
-        showError('Enter bet amount!');
-    }
-    else if(betAmount <= 0){
-        showError('Bet must be greater than 0!');
-    }else{
-        showError('Success');
-    }
-}
-
-function showError(message){
-    document.querySelector('.error').textContent = message;
-    setTimeout(() => {
-        document.querySelector('.error').textContent = '';
-    },2000);
-}
-
 //To do
-//Making bet after clicking on a button
+//Fix functions
 //Reward user after countdown ends
 //Make better styling
 //Add menu, footer and shop
