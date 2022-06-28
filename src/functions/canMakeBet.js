@@ -1,27 +1,29 @@
 import showError from './showError.js';
 
-function makeBet(color, timerRunning, setBetAmount, colorBetAmount, balance, setBalance, setMadeBet){
+function canMakeBet(timerRunning, balance){
     const betAmountString = document.querySelector('.betInput').value;
     const betAmount = parseInt(betAmountString);
 
-    if(betAmount === ''){
+    if(betAmountString === ''){
         showError('Enter bet amount!');
+        return false;
     }
     else if(betAmount <= 0){
         showError('Bet must be greater than 0!');
+        return false;
     }else{
         if(timerRunning){
             if(betAmount > balance){
                 showError('You dont have enough balance!');
+                return false;
             }else{
-                setBetAmount(colorBetAmount + betAmount);
-                setBalance(balance - betAmount);
-                setMadeBet(true);
+                return true;
             }
         }else{
             showError('The countdown is stopped!');
+            return false;
         }
     }
 }
 
-export default makeBet;
+export default canMakeBet;

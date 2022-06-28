@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Home{
+  text-align: center;
+}
+
+.timer{
+  width: 40%;
+  border: 2px solid black;
+  margin: 5px auto;
+  height: 20px;
+}
+
+.timer-progress{
+  width: 100%;
+  background-color: crimson;
+  height: 100%;
+  transition: width 1s linear;
+}
+
+.results{
+  display: flex;
+  justify-content: center;
+}
+
+.history-box{
+  width: 40px;
+  height: 40px;
+  border: 2px solid black;
+  margin: 10px;
+}
+
+.red-box{
+  background-color: crimson;
+}
+
+.black-box{
+  background-color: #333;
+}
+
+.green-box{
+  background-color:lime;
+}
