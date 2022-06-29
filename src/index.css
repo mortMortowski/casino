@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #333;
+  color: white;
 }
 
 code {
@@ -14,13 +16,15 @@ code {
 
 .Home{
   text-align: center;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .timer{
-  width: 40%;
-  border: 2px solid black;
-  margin: 5px auto;
-  height: 20px;
+  width: 100%;
+  border: 2px solid #222;
+  margin: 5px 0;
+  height: 25px;
 }
 
 .timer-progress{
@@ -33,6 +37,7 @@ code {
 .results{
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .history-box{
@@ -47,9 +52,93 @@ code {
 }
 
 .black-box{
-  background-color: #333;
+  background-color: #222;
 }
 
 .green-box{
   background-color:lime;
+}
+
+.left-block{
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.balance{
+  margin-bottom: 10px;
+}
+
+.betInput{
+  width: 200px;
+  height: 20px;
+  background-color: rgb(190, 190, 190);
+  outline: none;
+}
+
+.bets{
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
+}
+
+.make-bet-btn{
+  margin-top: 10px;
+  width: 200px;
+  font-size: 16px;
+  height: 30px;
+  color: white;
+}
+
+.red-bet-btn{
+  background-color: crimson;
+}
+
+.green-bet-btn{
+  background-color: lime;
+  color: black;
+}
+
+.black-bet-btn{
+  background-color: #222;
+}
+
+.make-bet-btn:hover{
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.red-bet-btn:hover{
+  background-color: #cb032b;
+}
+
+.green-bet-btn:hover{
+  background-color: #00c100;
+}
+
+.black-bet-btn:hover{
+  background-color: #111;
+}
+
+.admin-panel{
+  border: 2px solid crimson;
+  padding: 5px;
+}
+
+.admin-btn{
+  background-color: crimson;
+  color: white;
+  font-size: 16px;
+  width: 150px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.admin-btn:hover{
+  cursor: pointer;
+  background-color: #cb032b;
+}
+
+.error{
+  font-size: 20px;
+  margin-top: 20px;
 }

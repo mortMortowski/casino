@@ -13,6 +13,7 @@ function Home(){
     const [madeBet, setMadeBet] = useState(false);
     const [history, setHistory] = useState(["black", "red"]);
 
+    //giving rewards after each round
     useEffect(() => {
         if(timerRunning && madeBet){
 
@@ -44,14 +45,16 @@ function Home(){
                     })}
                 </div>
             </div>
-            <div className="balance">{balance}</div>
-            <div className="bet-amount">
-                <input type="number" className="betInput"/>
+            <div className="left-block">
+                <div className="balance">Balance: {balance}</div>
+                <div className="bet-amount">
+                    <input type="number" className="betInput"/>
+                </div>
             </div>
             <div className="bets">
                 <div className="red-bets">
                     <div className="red-amount">{redBet}</div>
-                    <button onClick={() => {
+                    <button className="make-bet-btn red-bet-btn" onClick={() => {
                         if(canMakeBet(timerRunning, balance)){
                             const betAmount = parseInt(document.querySelector('.betInput').value);
                             setRedBet(betAmount + redBet);
@@ -62,7 +65,7 @@ function Home(){
                 </div>
                 <div className="green-bets">
                     <div className="green-amount">{greenBet}</div>
-                    <button onClick={() => {
+                    <button className="make-bet-btn green-bet-btn" onClick={() => {
                         if(canMakeBet(timerRunning, balance)){
                             const betAmount = parseInt(document.querySelector('.betInput').value);
                             setGreenBet(betAmount + greenBet);
@@ -73,7 +76,7 @@ function Home(){
                 </div>
                 <div className="black-bets">
                     <div className="black-amount">{blackBet}</div>
-                    <button onClick={() => {
+                    <button className="make-bet-btn black-bet-btn" onClick={() => {
                         if(canMakeBet(timerRunning, balance)){
                             const betAmount = parseInt(document.querySelector('.betInput').value);
                             setBlackBet(betAmount + blackBet);
@@ -84,8 +87,9 @@ function Home(){
                 </div>
             </div>
             <div className="admin-panel">
-                <button onClick={() => {startTimer(timerRunning, setTimerRunning, history, setHistory)}}>Start Timer</button>
-                <button onClick={() => {generateRandom(history, setHistory)}}>Generate Number</button>
+                <h2>Admin Panel</h2>
+                <button className="admin-btn" onClick={() => {startTimer(timerRunning, setTimerRunning, history, setHistory)}}>Start Timer</button>
+                <button className="admin-btn" onClick={() => {generateRandom(history, setHistory)}}>Generate Number</button>
             </div>
             <div className="error"></div>
         </div>
@@ -95,16 +99,13 @@ function Home(){
 function startTimer(timerRunning, setTimerRunning, history, setHistory){
     if(timerRunning){
         clearInterval(timer);
-        //document.querySelector('.timer').textContent = "timer stopped";
         setTimerRunning(false);
     }else{
         let time = 10;
         setTimerRunning(true);
-        //document.querySelector('.timer').textContent = time;
     
         timer = setInterval(() => {
             time--;
-            //document.querySelector('.timer').textContent = time;
             drawCounter(time - 1);
             if(time <= 0){
                 clearInterval(timer);
@@ -121,23 +122,23 @@ function startTimer(timerRunning, setTimerRunning, history, setHistory){
 
 function generateRandom(history, setHistory){
     let randomNumber = Math.floor(Math.random() * 37);
+    console.log(history.length);
     if(randomNumber === 0){
+        if(history.length >= 8)
+            history.shift();
+        setHistory(oldHistory => [...oldHistory, "green"]);
         result = 'green';
-        if(history.length >= 8)
-            history.shift();
-        setHistory( arr => [...arr, "green"]);
     }else if(randomNumber > 0 && randomNumber <= 18){
+        if(history.length >= 8)
+            history.shift();
+        setHistory(oldHistory => [...oldHistory, "red"]);
         result = 'red';
-        if(history.length >= 8)
-            history.shift();
-        setHistory( arr => [...arr, "red"]);
     }else{
-        result = 'black';
         if(history.length >= 8)
             history.shift();
-        setHistory( arr => [...arr, "black"]);
+        setHistory(oldHistory => [...oldHistory, "black"]);
+        result = 'black';
     }
-    
 }
 
 function drawCounter(time){
@@ -146,7 +147,11 @@ function drawCounter(time){
 }
 
 //To do
-//Make better styling
+//Fix history update bug
+//Show who made bet under bet buttons
+//Add login/register system
+//Connect with json db
+//Add node server
 //Add menu, footer and shop
 //Improve code
 
