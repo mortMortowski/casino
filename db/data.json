@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "coins": 1000
+        }
+    ],
+    "users": [
+        {
+            "id": 0,
+            "login": "admin",
+            "password": "123",
+            "coins": 1000
+        },
+        {
+            "id": 1,
+            "login": "test",
+            "password": "test123",
+            "coins": 500
+        }
+    ]
+}

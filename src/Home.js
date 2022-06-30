@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import canMakeBet from './functions/canMakeBet.js';
+import showError from './functions/showError.js';
 
 let timer;
 let result;
@@ -31,6 +32,17 @@ function Home(){
             }
         }// eslint-disable-next-line
     }, [timerRunning]);
+
+    fetch("http://localhost:8000/data").then(function(res){
+        if(!res.ok){
+            throw Error('Could not fetch data from the server');
+        }
+        return res.json()
+    }).then(function(data){
+        setBalance(data[0].coins)
+    }).catch(function(err){
+        showError(err.message);
+    });
 
     return(
         <div className="Home">
@@ -149,10 +161,11 @@ function drawCounter(time){
 //To do
 //Fix history update bug
 //Show who made bet under bet buttons
-//Add login/register system
-//Connect with json db
+//Add login/register system using cookies
 //Add node server
-//Add menu, footer and shop
 //Improve code
+
+//json server start:
+//npx json-server --watch db/data.json --port 8000
 
 export default Home;
