@@ -179,3 +179,102 @@ code {
 .Menu > ul > li > a:hover{
   color: crimson;
 }
+
+.red-bets-column{
+  margin-top: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-image:
+  linear-gradient(
+    to bottom, 
+    rgba(0,0,0,0),
+    crimson,
+    rgba(0,0,0,0)
+  ) 1 100%;
+}
+
+.red-bet-row{
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  margin: 0 5px;
+  color: rgb(241, 69, 103);
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  border-image: linear-gradient(
+  to left, rgba(0, 0, 0, 0) 1%, 
+  crimson 50%, 
+  rgba(0, 0, 0, 0) 100%) 
+  0% 0 100% 0/1px 0 1px 0 stretch;
+}
+
+.red-bet-row:last-child{
+  border: 0;
+}
+
+.green-bets-column{
+  margin-top: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-image:
+  linear-gradient(
+    to bottom, 
+    rgba(0,0,0,0),
+    lime,
+    rgba(0,0,0,0)
+  ) 1 100%;
+}
+
+.green-bet-row{
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  margin: 0 5px;
+  color: rgb(92, 241, 69);
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  border-image: linear-gradient(
+  to left, rgba(0, 0, 0, 0) 1%, 
+  lime 50%, 
+  rgba(0, 0, 0, 0) 100%) 
+  0% 0 100% 0/1px 0 1px 0 stretch;
+}
+
+.green-bet-row:last-child{
+  border: 0;
+}
+
+.black-bets-column{
+  margin-top: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-image:
+  linear-gradient(
+    to bottom, 
+    rgba(0,0,0,0),
+    #6c6c6c,
+    rgba(0,0,0,0)
+  ) 1 100%;
+}
+
+.black-bet-row{
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  margin: 0 5px;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  border-image: linear-gradient(
+  to left, rgba(0, 0, 0, 0) 1%, 
+  #6c6c6c 50%, 
+  rgba(0, 0, 0, 0) 100%) 
+  0% 0 100% 0/1px 0 1px 0 stretch;
+}
+
+.black-bet-row:last-child{
+  border: 0;
+}

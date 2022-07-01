@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import canMakeBet from './functions/canMakeBet.js';
-import showError from './functions/showError.js';
+//import showError from './functions/showError.js';
 
 let timer;
 let result;
@@ -33,7 +33,8 @@ function Home(){
         }// eslint-disable-next-line
     }, [timerRunning]);
 
-    fetch("http://localhost:8000/data").then(function(res){
+    //test fetch data from the server
+    /*fetch("http://localhost:8000/data").then(function(res){
         if(!res.ok){
             throw Error('Could not fetch data from the server');
         }
@@ -42,7 +43,7 @@ function Home(){
         setBalance(data[0].coins)
     }).catch(function(err){
         showError(err.message);
-    });
+    });*/
 
     return(
         <div className="Home">
@@ -72,8 +73,10 @@ function Home(){
                             setRedBet(betAmount + redBet);
                             setBalance(balance - betAmount);
                             setMadeBet(true);
+                            modifyColumn("add", "red");
                         }
                     }}>Red</button>
+                    <div className="red-bets-column"></div>
                 </div>
                 <div className="green-bets">
                     <div className="green-amount">{greenBet}</div>
@@ -83,8 +86,10 @@ function Home(){
                             setGreenBet(betAmount + greenBet);
                             setBalance(balance - betAmount);
                             setMadeBet(true);
+                            modifyColumn("add", "green");
                         }
                         }}>Green</button>
+                        <div className="green-bets-column"></div>
                 </div>
                 <div className="black-bets">
                     <div className="black-amount">{blackBet}</div>
@@ -94,8 +99,10 @@ function Home(){
                             setBlackBet(betAmount + blackBet);
                             setBalance(balance - betAmount);
                             setMadeBet(true);
+                            modifyColumn("add", "black");
                         }
-                    }}>Black</button>
+                        }}>Black</button>
+                        <div className="black-bets-column"></div>
                 </div>
             </div>
             <div className="admin-panel">
@@ -124,6 +131,7 @@ function startTimer(timerRunning, setTimerRunning, history, setHistory){
                 setTimerRunning(false);
                 setTimeout(() => {
                     generateRandom(history, setHistory);
+                    modifyColumn("clean", "all");
                     drawCounter(10);
                     startTimer(timerRunning, setTimerRunning, history, setHistory);
                 }, 2000);
@@ -158,9 +166,35 @@ function drawCounter(time){
     counter.style.width = (time * 10) + "%";
 }
 
+function modifyColumn(action, color){
+    if(action === 'add'){
+        if(color === 'red'){
+            let redColumn = document.querySelector('.red-bets-column');
+            redColumn.innerHTML += '<div class="red-bet-row"><span class="red-bet-username">Szpaku</span><span class="red-bet-amount">250</span></div>';
+        }
+        else if(color === 'green'){
+            let greenColumn = document.querySelector('.green-bets-column');
+            greenColumn.innerHTML += '<div class="green-bet-row"><span class="green-bet-username">Szpaku</span><span class="green-bet-amount">250</span></div>';
+        }
+        else if(color === 'black'){
+            let blackColumn = document.querySelector('.black-bets-column');
+            blackColumn.innerHTML += '<div class="black-bet-row"><span class="black-bet-username">Szpaku</span><span class="black-bet-amount">250</span></div>';
+        }
+    }
+    else if(action === 'clean'){
+        let redColumn = document.querySelector('.red-bets-column');
+        let greenColumn = document.querySelector('.green-bets-column');
+        let blackColumn = document.querySelector('.black-bets-column');
+
+        redColumn.innerHTML = '';
+        greenColumn.innerHTML = '';
+        blackColumn.innerHTML = '';
+    }
+}
+
 //To do
 //Fix history update bug
-//Show who made bet under bet buttons
+//Fix error when switching pages
 //Add login/register system using cookies
 //Add node server
 //Improve code
