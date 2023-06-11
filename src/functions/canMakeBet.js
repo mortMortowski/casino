@@ -4,7 +4,10 @@ function canMakeBet(timerRunning, balance){
     const betAmountString = document.querySelector('.betInput').value;
     const betAmount = parseInt(betAmountString);
 
-    if(betAmountString === ''){
+    if(!cookies.username){
+        showError('Login to play!');
+        return false;
+    }else if(betAmountString === ''){
         showError('Enter bet amount!');
         return false;
     }

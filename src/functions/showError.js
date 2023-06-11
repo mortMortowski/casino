@@ -1,7 +1,10 @@
 function showError(message){
-    document.querySelector('.error').textContent = message;
+    const error = document.querySelector('.error');
+    error.textContent = message;
+    error.style.display = "block";
     setTimeout(() => {
-        document.querySelector('.error').textContent = '';
+        error.textContent = '';
+        error.style.display = "none";
     },2000);
 }
 
